@@ -10,11 +10,10 @@ def memoize(f):
 
 @memoize
 def fib(n):
-	if n == 0:
-		return 0
-	if n == 1:
-		return 1
-	return fib(n-1) + fib(n-2)
+	a,b = 0,1
+	while a<n:
+		yield a
+		a,b = b, a+b
 
 fibonacci = []
 
