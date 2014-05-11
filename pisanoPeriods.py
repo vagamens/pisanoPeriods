@@ -68,6 +68,7 @@ def writeToFile(infile, array):
 		file.writerow(['0', 'Division by Zero Error'])
 		file.writerows(array[1:])
 	print(array)
+	print('Done')
 
 def main(count=0, modNum=0):
 	moded, numLength, fibonacci = [], [], []
