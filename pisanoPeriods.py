@@ -70,7 +70,7 @@ def writeToFile(infile, array):
 	print(array)
 
 def main(count=0, modNum=0):
-	moded, numLength, fibonacci = []
+	moded, numLength, fibonacci = [], [], []
 	fib(count)
 	fibonacci = listFib(fibonacci, listed)
 	moded = findMods(modNum, fibonacci)
