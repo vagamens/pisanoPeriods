@@ -7,12 +7,6 @@ def fib(n):
 		c+=1
 		a,b = b, a+b
 
-def lenCount(array):
-	count = 0
-	for i in array:
-		count+=1
-	return count
-
 def findMods(fibList, num):
 	tempList = []
 	for i in range(2, num):
@@ -44,30 +38,6 @@ def remod(fibList, num, fibLen):
 		tempList.append(int(int(i) % num))
 	print(tempList)
 	return tempList
-
-def findLength(array1, array2):
-	array2.append((0, 'N/A'))
-	array2.append((1, 1))
-	tempArrays = []
-	for i in array1:
-		tempArray = []
-		for count in range(lenCount(array1)-1):
-			if i[0] == array1[count][0]:
-				tempArray.append(array1[count])
-		if tempArray not in tempArrays:
-			tempArrays.append(tempArray)
-	for arrayCount in range(lenCount(tempArrays)):
-		temporary = []
-		tempArray = tempArrays.pop(0)
-		temporary.append(tempArray.pop(0))
-		for count in range(lenCount(tempArray)):
-			if tempArray[0][1][1] != 0:
-				temporary.append(tempArray.pop(0))
-			elif (tempArray[0][1][1] == 0) and (tempArray[1][1][1] != 1):
-				temporary.append(tempArray.pop(0))
-			else:
-				array2.append((tempArray[0][0], lenCount(temporary)))
-				break
 
 def findLength2(modedList, fibList, fibLen):
 	periodList = []
