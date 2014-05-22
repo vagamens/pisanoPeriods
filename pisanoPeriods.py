@@ -1,13 +1,5 @@
 #!/usr/bin/env python2
 
-import sys
-
-listed = dict()
-
-def memoize(f):
-	return lambda *args: listed[args] if args in listed else listed.update({args: f(*args)}) or listed[args]
-
-@memoize
 def fib(n):
 	a,b = 0,1
 	while a<n:
@@ -19,13 +11,6 @@ def listCount(array):
 	for i in array:
 		count+=1
 	return count
-
-def listFib(fib, list):
-	sort = sorted(list.items(), key=lambda x: x[1])
-	tempFib = []
-	for i,j in sort:
-		tempFib.append(j)
-	return tempFib
 
 def findMods(modNum, fib):
 	tempArray = []
@@ -58,9 +43,6 @@ def findLength(array1, array2):
 				array2.append((tempArray[0][0], listCount(temporary)))
 				break
 
-moded = []
-numLength = []
-
 def sanityCheck(count, modNum):
 	if (modNum-1) == 7 and count <= 16:
 		return None, 'Not enough information.', 'Please increase the count of fibonacci numbers', 'or decrease the length count number.'
@@ -78,14 +60,15 @@ def writeToFile(infile, array):
 
 def main(count=0, modNum=0):
 	moded, numLength, fibonacci = [], [], []
-	fib(count)
-	fibonacci = listFib(fibonacci, listed)
+	for num in fib(count):
+		fibonacci.append(num)
 	moded = findMods(modNum, fibonacci)
 	findLength(moded, numLength)
 	# print moded
 	#writeToFile('PisanoPeriods.csv', numLength) # under development
 
 if __name__ == '__main__':
+	import sys
 	count, modNum = int(sys.argv[1]), (int(sys.argv[2])+1)
 	checks = sanityCheck(count, modNum)
 	if checks[0] == True:
