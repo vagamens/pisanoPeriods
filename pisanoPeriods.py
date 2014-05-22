@@ -13,12 +13,14 @@ def listCount(array):
 		count+=1
 	return count
 
-def findMods(modNum, fib):
-	tempArray = []
-	for i in range(2, modNum):
-		for j in fib:
-			tempArray.append((i, (j, j % i)))
-	return tempArray
+def findMods(fibList, num):
+	tempList = []
+	for i in range(2, num):
+		tempModList = []
+		for item in fibList:
+			tempModList.append(int(int(item) % i))
+		tempList.append((i, tempModList))
+	return tempList
 
 def findLength(array1, array2):
 	array2.append((0, 'N/A'))
@@ -59,8 +61,10 @@ def main(count=0, modNum=0):
 	for num in fib(count):
 		fibonacci.append(num)
 	print(fibonacci)
-	moded = findMods(modNum, fibonacci)
-	findLength(moded, numLength)
+	moded = findMods(fibonacci, modNum)
+	print(moded)
+	#moded = findMods(modNum, fibonacci)
+	#findLength(moded, numLength)
 	# print moded
 	#writeToFile('PisanoPeriods.csv', numLength) # under development
 
