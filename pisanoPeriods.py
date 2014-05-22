@@ -1,9 +1,10 @@
 #!/usr/bin/env python2
 
 def fib(n):
-	a,b = 0,1
-	while a<n:
+	a,b,c = 0,1,0
+	while c<n:
 		yield a
+		c+=1
 		a,b = b, a+b
 
 def listCount(array):
@@ -62,6 +63,7 @@ def main(count=0, modNum=0):
 	moded, numLength, fibonacci = [], [], []
 	for num in fib(count):
 		fibonacci.append(num)
+	print(fibonacci)
 	moded = findMods(modNum, fibonacci)
 	findLength(moded, numLength)
 	# print moded
@@ -74,6 +76,6 @@ if __name__ == '__main__':
 	if checks[0] == True:
 		main(count, modNum)
 	else:
-		print checks[1]
-		print checks[2]
-		print checks[3]
+		print(checks[1])
+		print(checks[2])
+		print(checks[3])
