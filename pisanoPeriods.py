@@ -1,6 +1,5 @@
 #!/usr/bin/env python2
 
-import csv
 import sys
 
 listed = dict()
@@ -15,24 +14,25 @@ def fib(n):
 		yield a
 		a,b = b, a+b
 
-fibonacci = []
-
 def listCount(array):
 	count = 0
 	for i in array:
 		count+=1
 	return count
 
-def listFib():
-	sort = sorted(listed.items(), key=lambda x: x[1])
+def listFib(fib, list):
+	sort = sorted(list.items(), key=lambda x: x[1])
+	tempFib = []
 	for i,j in sort:
-		fibonacci.append(j)
-	listCount(fibonacci)
+		tempFib.append(j)
+	return tempFib
 
-def findMods(modNum, array):
+def findMods(modNum, fib):
+	tempArray = []
 	for i in range(2, modNum):
-		for j in fibonacci:
-			array.append((i, (j, j % i)))
+		for j in fib:
+			tempArray.append((i, (j, j % i)))
+	return tempArray
 
 def findLength(array1, array2):
 	array2.append((0, 'N/A'))
@@ -66,18 +66,24 @@ def sanityCheck(count, modNum):
 		return None, 'Not enough information.', 'Please increase the count of fibonacci numbers', 'or decrease the length count number.'
 	else: return (True, 0, 0)
 
+def writeToFile(infile, array):
+	import csv
+	with open (infile, 'wb') as csvfile:
+		file = csv.writer(csvfile)
+		file.writerow(['Modulus Number', 'Series Length'])
+		file.writerow(['0', 'Division by Zero Error'])
+		file.writerows(array[1:])
+	print(array)
+	print('Done')
+
 def main(count=0, modNum=0):
+	moded, numLength, fibonacci = [], [], []
 	fib(count)
-	listFib()
-	findMods(modNum, moded)
+	fibonacci = listFib(fibonacci, listed)
+	moded = findMods(modNum, fibonacci)
 	findLength(moded, numLength)
 	# print moded
-	with open('PisanoPeriods.csv', 'wb') as csvfile:
-		writer = csv.writer(csvfile)
-		writer.writerow(['Modulus Number', 'Series Length'])
-		writer.writerow(['0', 'Division by Zero Error'])
-		writer.writerows(numLength[1:])
-	print numLength
+	#writeToFile('PisanoPeriods.csv', numLength) # under development
 
 if __name__ == '__main__':
 	count, modNum = int(sys.argv[1]), (int(sys.argv[2])+1)
