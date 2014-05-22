@@ -17,14 +17,14 @@ def findMods(fibList, num):
 	return tempList
 
 def listCount(list, findList, initialIndex = 1):
-	periodIndex = list.index(findList[0], initialIndex)
-	if int(periodIndex):
-		if list[periodIndex+1] == findList[1] and list[periodIndex+2] == findList[2]:
-			return int(2), int(periodIndex)
-		else:
-			return listCount(list, findList, periodIndex+1)
+	try:
+		periodIndex = list.index(findList[0], initialIndex)
+	except ValueError:
+		return 1, None
+	if list[periodIndex+1] == findList[1] and list[periodIndex+2] == findList[2]:
+		return int(2), int(periodIndex)
 	else:
-		return 1	
+		return listCount(list, findList, periodIndex+1)
 
 def remod(fibList, num, fibLen):
 	fibLen += 10
@@ -76,6 +76,7 @@ def main(modNum=0):
 	# Find the length of the pisano periods
 	# for each modulus number
 	numLength = findLength(moded, fibonacci, count)
+	print(numLength)
 	#writeToFile('PisanoPeriods.csv', numLength) # under development
 
 if __name__ == '__main__':
