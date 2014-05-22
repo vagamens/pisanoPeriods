@@ -44,11 +44,6 @@ def findLength(array1, array2):
 				array2.append((tempArray[0][0], listCount(temporary)))
 				break
 
-def sanityCheck(count, modNum):
-	if (modNum-1) == 7 and count <= 16:
-		return None, 'Not enough information.', 'Please increase the count of fibonacci numbers', 'or decrease the length count number.'
-	else: return (True, 0, 0)
-
 def writeToFile(infile, array):
 	import csv
 	with open (infile, 'wb') as csvfile:
@@ -72,10 +67,4 @@ def main(count=0, modNum=0):
 if __name__ == '__main__':
 	import sys
 	count, modNum = int(sys.argv[1]), (int(sys.argv[2])+1)
-	checks = sanityCheck(count, modNum)
-	if checks[0] == True:
-		main(count, modNum)
-	else:
-		print(checks[1])
-		print(checks[2])
-		print(checks[3])
+	main(count, modNum)
