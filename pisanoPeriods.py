@@ -32,11 +32,9 @@ def remod(fibList, num, fibLen):
 	for item in fib(fibLen):
 		tempFibList.append(item)
 	fibList = tempFibList
-	print(len(fibList))
 	tempList = []
 	for i in fibList:
 		tempList.append(int(int(i) % num))
-	print(tempList)
 	return tempList
 
 def findLength(modedList, fibList, fibLen):
@@ -51,7 +49,6 @@ def findLength(modedList, fibList, fibLen):
 			count, periodIndex = listCount(entry[1], [0, 1, 1])
 			if count > 1: # count should only ever be 1 or 2
 				break
-			print(entry)
 			# since its not long enough, make it longer
 			fibLen += 10
 			entry[1] = remod(fibList, entry[0], fibLen)
@@ -79,7 +76,6 @@ def main(modNum=0):
 	# Find the length of the pisano periods
 	# for each modulus number
 	numLength = findLength(moded, fibonacci, count)
-	print(numLength)
 	#writeToFile('PisanoPeriods.csv', numLength) # under development
 
 if __name__ == '__main__':
